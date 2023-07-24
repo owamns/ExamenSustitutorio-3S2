@@ -46,12 +46,13 @@ class GanadorTest {
     @Test
     public void testWinnerPlayerWithMainDiagonal(){
         game.resetGame();
-        game.jugar(1,1); // X
-        game.jugar(1,2); // O
-        game.jugar(2,2); // X
-        game.jugar(2,3); // O
-        game.jugar(3,3); // X
-        Assertions.assertEquals(TicTacToe.GameState.X_WON, game.getGameState());
+        game.jugar(1,2); // X
+        game.jugar(1,1); // O
+        game.jugar(1,3); // X
+        game.jugar(2,2); // O
+        game.jugar(2,3); // X
+        game.jugar(3,3); // O
+        Assertions.assertEquals(TicTacToe.GameState.O_WON, game.getGameState());
     }
 
     //Condicion ganadora IV - diagonal secundaria ganadora
