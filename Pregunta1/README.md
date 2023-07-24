@@ -524,12 +524,17 @@ public void testDrawGame(){
     Assertions.assertEquals(TicTacToe.GameState.DRAW, game.getGameState());
 }
 ```
+<h1 align="center">
+  <img src="https://raw.githubusercontent.com/owamns/ExamenSustitutorio-3S2/main/Pregunta1/files/requisito4/i1.png">
+</h1>
+
 La prueba pasa debido a que se espera un empate luego de llenar el tablero.
 
 ## Cobertura de código
 
 El código de cobertura no es del 100% esto debido a que no se cubrieron todos las ramas de 
 ejecucion aunque si se ejecutaron todas las clases, métodos y lineas del código.
+Las causas de esto se debe a las condiciones 'if' que se presentan en el código.
 
 <h1 align="center">
   <img src="https://raw.githubusercontent.com/owamns/ExamenSustitutorio-3S2/main/Pregunta1/files/cobertura.png">
@@ -542,10 +547,14 @@ ejecucion aunque si se ejecutaron todas las clases, métodos y lineas del códig
 
 # IA
 
+<h1 align="center">
+  <img src="https://raw.githubusercontent.com/owamns/ExamenSustitutorio-3S2/main/Pregunta1/files/ia.png">
+</h1>
+
 Se utiliza el algoritmo `minimax` para simular una IA, que para cualquier combinacion de movimientos de X se alcanza
 el empate.
 
-La implementacion del codigo se encuentra en la classe `TicTacToe`:
+La implementacion del codigo se encuentra en la clase `TicTacToe` en el método playIA:
 ```
 public class TicTacToe {
   .
@@ -659,7 +668,7 @@ public class TicTacToe {
 }
 ```
 
-Se puede hacer las pruebas manuales en la consola ejecutando el codigo de la clase `PruebaIA`.
+Se puede hacer las pruebas manuales en la consola ejecutando el `main` de la clase `PruebaIA`.
 
 
 
