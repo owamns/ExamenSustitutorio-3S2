@@ -540,4 +540,126 @@ ejecucion aunque si se ejecutaron todas las clases, métodos y lineas del códig
 </h1>
 
 
+# IA
+
+Se utiliza el algoritmo `minimax` para simular una IA, que para cualquier combinacion de movimientos de X se alcanza
+el empate.
+
+La implementacion del codigo se encuentra en la classe `TicTacToe`:
+```
+public class TicTacToe {
+  .
+  .
+  .
+
+    public void playIA() {
+        int profundidad = 3;
+        int[] mejorMovimiento = minimax(profundidad, 'O');
+
+        int fila = mejorMovimiento[0];
+        int columna = mejorMovimiento[1];
+
+        jugar(fila + 1, columna + 1);
+    }
+
+    private int[] minimax(int profundidad, char jugador) {
+        List<int[]> movimientosPosibles = generarMovimientos();
+
+        int mejorPuntaje = (jugador == 'O') ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+        int puntajeActual;
+        int mejorFila = -1;
+        int mejorColumna = -1;
+
+        if (movimientosPosibles.isEmpty() || profundidad == 0 || currentGameState != GameState.PLAYING) {
+            mejorPuntaje = evaluateBoard();
+        } else {
+            for (int[] movimiento : movimientosPosibles) {
+                int fila = movimiento[0];
+                int columna = movimiento[1];
+                grid[fila][columna] = (jugador == 'O') ? Box.O : Box.X;
+
+                if (jugador == 'O') {
+                    puntajeActual = minimax(profundidad - 1, 'X')[2];
+                    if (puntajeActual > mejorPuntaje) {
+                        mejorPuntaje = puntajeActual;
+                        mejorFila = fila;
+                        mejorColumna = columna;
+                    }
+                } else {
+                    puntajeActual = minimax(profundidad - 1, 'O')[2];
+                    if (puntajeActual < mejorPuntaje) {
+                        mejorPuntaje = puntajeActual;
+                        mejorFila = fila;
+                        mejorColumna = columna;
+                    }
+                }
+
+                grid[fila][columna] = Box.EMPTY;
+            }
+        }
+
+        return new int[] { mejorFila, mejorColumna, mejorPuntaje };
+    }
+
+    private int evaluateBoard() {
+        int score = 0;
+
+        // Filas y columnas
+        for (int i = 0; i < N; i++) {
+            score += evaluateLine(grid[i][0], grid[i][1], grid[i][2]);
+            score += evaluateLine(grid[0][i], grid[1][i], grid[2][i]);
+        }
+
+        // Diagonales
+        score += evaluateLine(grid[0][0], grid[1][1], grid[2][2]);
+        score += evaluateLine(grid[0][2], grid[1][1], grid[2][0]);
+
+        return score;
+    }
+
+    private int evaluateLine(Box box1, Box box2, Box box3) {
+        int score = 0;
+
+        if (box1 == Box.O) {
+            if (box2 == Box.O) {
+                score = 10;
+            } else if (box2 == Box.X || box2 == Box.EMPTY) {
+                score = 0;
+            }
+        } else if (box1 == Box.X) {
+            if (box2 == Box.X) {
+                score = -10;
+            } else if (box2 == Box.O || box2 == Box.EMPTY) {
+                score = 0;
+            }
+        } else if (box1 == Box.EMPTY) {
+            if (box2 == Box.O) {
+                score = 1;
+            } else if (box2 == Box.X) {
+                score = -1;
+            }
+        }
+
+        if (box3 == Box.O) {
+            if (score > 0) {
+                score *= 10;
+            }
+        } else if (box3 == Box.X) {
+            if (score < 0) {
+                score *= 10;
+            }
+        }
+
+        return score;
+    }
+
+  .
+  .
+  .
+}
+```
+
+Se puede hacer las pruebas manuales en la consola ejecutando el codigo de la clase `PruebaIA`.
+
+
 
